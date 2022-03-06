@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '@redwoodjs/auth'
+import Avatar from 'src/components/Avatar'
 
 const Account = () => {
   const { client: supabase, currentUser, logOut } = useAuth()
@@ -96,7 +97,14 @@ const Account = () => {
               onChange={(e) => setWebsite(e.target.value)}
             />
           </div>
-
+          <Avatar
+            url={avatar_url}
+            size={150}
+            onUpload={(url) => {
+              setAvatarUrl(url)
+              updateProfile({ username, website, avatar_url: url })
+            }}
+          />
           <div>
             <button
               className="button block primary"
